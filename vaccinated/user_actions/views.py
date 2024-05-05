@@ -1,11 +1,11 @@
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 from rest_framework import status
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from user_actions.serializers import AddressSerializer, RegisterUserSerializer, LoginUserSerializer
 from user_actions.models import AppUser
+from user_actions.serializers import AddressSerializer, RegisterUserSerializer, LoginUserSerializer
 
 
 class RegisterUser(APIView):
