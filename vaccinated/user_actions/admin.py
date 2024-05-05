@@ -1,6 +1,6 @@
+from django.apps import apps
 from django.contrib import admin
 from django.contrib.admin.exceptions import AlreadyRegistered
-from django.apps import apps
 
 models = apps.get_models()
 

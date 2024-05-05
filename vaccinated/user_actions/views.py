@@ -1,10 +1,11 @@
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from rest_framework import status
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from user_actions.serializers import AddressSerializer, RegisterUserSerializer
 from user_actions.models import AppUser
+from user_actions.serializers import AddressSerializer, RegisterUserSerializer, LoginUserSerializer
 
 
 class RegisterUser(APIView):
@@ -49,3 +50,18 @@ class RegisterUser(APIView):
                 return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)
 
             return Response(status=status.HTTP_201_CREATED)
+
+
+class LoginUser(APIView):
+    serializer_class = LoginUserSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            password = serializer.validated_data['password']
+            user = authenticate(email=email, password=password)
+            if user:
+                return Response(status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)

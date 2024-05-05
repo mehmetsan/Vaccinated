@@ -3,6 +3,11 @@ from rest_framework import serializers
 from user_actions.models import Address
 
 
+class LoginUserSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True, allow_null=False, allow_blank=False)
+    password = serializers.CharField(required=True, allow_null=False, allow_blank=False)
+
+
 class RegisterUserSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True, allow_blank=False, allow_null=False)
     first_name = serializers.CharField(required=True, allow_blank=False, allow_null=False)
