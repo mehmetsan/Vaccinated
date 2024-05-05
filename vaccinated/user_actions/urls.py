@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 
+from user_actions.views import RegisterUser
+
 urlpatterns = [
-    path("user_actions/", admin.site.urls),
+    path("register", RegisterUser.as_view(), name="user_actions_register"),
 ]
