@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, auth
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -62,6 +62,7 @@ class LoginUser(APIView):
             password = serializer.validated_data['password']
             user = authenticate(email=email, password=password)
             if user:
+                auth.login(request, user)
                 return Response(status=status.HTTP_200_OK)
             return Response(status=status.HTTP_400_BAD_REQUEST)
         return Response(status=status.HTTP_400_BAD_REQUEST)
