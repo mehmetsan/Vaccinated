@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.models import AppUser
+from api.models import AppUser, Vaccination, UserVaccination
 from api.serializers import AddressSerializer, RegisterUserSerializer, LoginUserSerializer
 
 
@@ -39,6 +39,13 @@ class RegisterUser(APIView):
                 app_user = AppUser.objects.create(user=user, email=data['email'], age=data['age'], sex=data['sex'],
                                                   first_name=data['first_name'], last_name=data['last_name'],
                                                   address=address)
+
+                for vaccine in data['vaccinations']:
+                    vaccine = Vaccination.objects.get(id=vaccine['id'])
+                    user_vaccination = UserVaccination.objects.create(
+                        user=app_user,
+                        vaccination=vaccine
+                    )
             except Exception as e:
                 print(e)
                 address.delete()
@@ -66,3 +73,21 @@ class LoginUser(APIView):
                 return Response(status=status.HTTP_200_OK)
             return Response(status=status.HTTP_400_BAD_REQUEST)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class VaccinationAPIView(APIView):
+
+    def get(self, request):
+        vaccines = Vaccination.objects.all()
+        response = []
+
+        for vaccine in vaccines:
+            response.append({
+                "id": vaccine.id,
+                "name": vaccine.name,
+                "dose": vaccine.dose,
+                "start": vaccine.start,
+                "end": vaccine.end,
+                "optional": vaccine.optional
+            })
+        return Response(data=response, status=status.HTTP_200_OK)

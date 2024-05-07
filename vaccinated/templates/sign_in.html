@@ -229,7 +229,7 @@ form .button {
 
     form.submit.addEventListener("click", async (e) => {
         e.preventDefault();
-        const loginUrl = "http://127.0.0.1:8000/user_actions/login"; // Replace with your actual API URL
+        const loginUrl = "http://127.0.0.1:8000/api/login"; // Replace with your actual API URL
 
         try {
             const response = await fetch(loginUrl, {

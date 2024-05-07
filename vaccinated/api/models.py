@@ -28,3 +28,18 @@ class AppUser(models.Model):
 
 class Vaccination(models.Model):
     name = models.CharField(max_length=100)
+    dose = models.IntegerField(null=True)
+    start = models.IntegerField(null=True)
+    end = models.IntegerField(null=True)
+    optional = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.name} - {self.dose}"
+
+
+class UserVaccination(models.Model):
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    vaccination = models.ForeignKey(Vaccination, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} / {self.vaccination}"

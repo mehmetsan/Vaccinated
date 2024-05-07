@@ -16,7 +16,7 @@ class RegisterUserSerializer(serializers.Serializer):
     confirm_password = serializers.CharField(required=True, allow_blank=False, allow_null=False)
     age = serializers.IntegerField(required=True)
     sex = serializers.CharField(required=True, allow_blank=False, allow_null=False)
-
+    vaccinations = serializers.JSONField(required=True, allow_null=False)
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,11 +1,8 @@
-from django.apps import apps
 from django.contrib import admin
-from django.contrib.admin.exceptions import AlreadyRegistered
+from api.models import Address, AppUser, UserVaccination, Vaccination
 
-models = apps.get_models()
-
-for model in models:
-    try:
-        admin.site.register(model)
-    except AlreadyRegistered:
-        pass
+# Register your models here.
+admin.site.register(Address)
+admin.site.register(AppUser)
+admin.site.register(UserVaccination)
+admin.site.register(Vaccination)
