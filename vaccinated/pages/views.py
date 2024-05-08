@@ -1,11 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 
+from api.models import AppUser
+
 
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
-        return render(request, "home.html")
+        user = AppUser.objects.get(email=request.user.email)
+        missing_vaccinations = user.get_missing_vaccinations()
+        return render(request, "home.html", context={"missing_vaccinations": missing_vaccinations})
     else:
         return render(request, "sign_in.html")
 

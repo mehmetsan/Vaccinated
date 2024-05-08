@@ -25,6 +25,20 @@ class AppUser(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+    def get_missing_vaccinations(self):
+        completed_vaccinations = UserVaccination.objects.filter(user=self)
+        missing_vaccinations = Vaccination.objects.exclude(id__in=completed_vaccinations.values_list('id', flat=True))
+        result = []
+        for vaccination in missing_vaccinations:
+            result.append({
+                "id": vaccination.id,
+                "dose": vaccination.dose,
+                "start": vaccination.start,
+                "end": vaccination.end,
+                "optional": "true" if vaccination.optional else "false"
+            })
+        return result
+
 
 class Vaccination(models.Model):
     name = models.CharField(max_length=100)
