@@ -1,0 +1,50 @@
+name,dose,start,end,optional,total_doses
+Hepatisis B,1,0,0,FALSE,3
+Hepatisis B,2,1,2,FALSE,3
+Hepatisis B,3,6,18,FALSE,3
+Rotavirus,1,2,2,FALSE,3
+Rotavirus,2,4,4,FALSE,3
+Rotavirus,3,6,6,TRUE,3
+DTaP,1,2,2,FALSE,5
+DTaP,2,4,4,FALSE,5
+DTaP,3,6,6,FALSE,5
+DTaP,4,15,18,FALSE,5
+DTaP,5,48,72,FALSE,5
+Hib,1,2,2,FALSE,5
+Hib,2,4,4,FALSE,5
+Hib,3,6,6,TRUE,5
+Hib,4,12,15,FALSE,5
+Hib,5,228,780,TRUE,5
+Pneumococcal,1,2,2,FALSE,6
+Pneumococcal,2,4,4,FALSE,6
+Pneumococcal,3,6,6,FALSE,6
+Pneumococcal,4,12,15,FALSE,6
+Pneumococcal,5,228,720,TRUE,6
+Pneumococcal,6,720,780,FALSE,6
+Polio,1,2,2,FALSE,4
+Polio,2,4,4,FALSE,4
+Polio,3,6,18,FALSE,4
+Polio,4,48,72,FALSE,4
+COVID-19,1,6,72,FALSE,3
+COVID-19,2,84,216,FALSE,3
+COVID-19,3,228,780,FALSE,3
+MMR,1,12,15,FALSE,3
+MMR,2,48,60,FALSE,3
+MMR,2,228,792,TRUE,3
+Chickenpox,1,12,15,FALSE,2
+Chickenpox,2,48,60,FALSE,2
+Hepatisis A,1,12,18,FALSE,3
+Hepatisis A,2,18,24,FALSE,3
+Hepatisis A,3,228,780,TRUE,3
+HPV,1,132,160,FALSE,2
+HPV,2,228,312,FALSE,2
+Tdap,1,132,160,FALSE,1
+Tdap/Td,1,228,348,FALSE,2
+Tdap/Td,2,348,468,FALSE,2
+Meningococcal ACWY,1,132,160,FALSE,2
+Meningococcal ACWY,2,192,204,FALSE,2
+Meningococcal B,1,192,228,TRUE,1
+Mpox,1,216,228,TRUE,2
+Mpox,2,228,780,TRUE,2
+Shingles,1,228,600,TRUE,2
+Shingles,2,600,780,FALSE,2

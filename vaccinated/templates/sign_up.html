@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Vaccinated</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgb(57, 92, 188);
+        }
+        .container {
+            position: relative;
+            max-width: 700px;
+            width: 100%;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .container header {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: 500;
+            text-align: center;
+        }
+        .container .form {
+            margin-top: 30px;
+        }
+        .form .input-box {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .input-box label {
+            color: #333;
+        }
+        .form :where(.input-box input, .select-box) {
+            position: relative;
+            height: 50px;
+            width: 100%;
+            outline: none;
+            font-size: 1rem;
+            color: #707070;
+            margin-top: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 0 15px;
+        }
+        .input-box input:focus {
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+        }
+        .form .column {
+            display: flex;
+            column-gap: 15px;
+        }
+        .form .gender-box {
+            margin-top: 20px;
+        }
+        .gender-box h3 {
+            color: #333;
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+        .form :where(.gender-option, .gender) {
+            display: flex;
+            align-items: center;
+            column-gap: 50px;
+            flex-wrap: wrap;
+        }
+        .form .gender {
+            column-gap: 5px;
+        }
+        .gender input {
+            accent-color: rgb(130, 106, 251);
+        }
+        .form :where(.gender input, .gender label) {
+            cursor: pointer;
+        }
+        .gender label {
+            color: #707070;
+        }
+        .address :where(input, .select-box) {
+            margin-top: 15px;
+        }
+        .select-box select {
+            height: 100%;
+            width: 100%;
+            outline: none;
+            border: none;
+            color: #707070;
+            font-size: 1rem;
+        }
+        .form button {
+            height: 55px;
+            width: 100%;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 400;
+            margin-top: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: rgb(130, 106, 251);
+        }
+        .form button:hover {
+            background: rgb(88, 56, 250);
+        }
+        /*Responsive*/
+        @media screen and (max-width: 500px) {
+            .form .column {
+                flex-wrap: wrap;
+            }
+            .form :where(.gender-option, .gender) {
+                row-gap: 15px;
+            }
+        }
+      </style>
+  </head>
+  <body>
+    <section class="container">
+      <header>Sign Up</header>
+      <form  class="form">
+        <div class="input-box">
+          <label>First Name</label>
+          <input class="first_name_input" name="first_name" type="text" placeholder="First Name" required />
+        </div>
+        <div class="input-box">
+          <label>Last Name</label>
+          <input class="last_name_input" name="last_name" type="text" placeholder="Last Name" required />
+        </div>
+        <div class="column">
+          <div class="input-box">
+            <label>Password</label>
+            <input class="password1_input" name="password1" type="password" placeholder="Enter password" required />
+          </div>
+          <div class="input-box">
+            <label>Password (Again)</label>
+            <input class="password2_input" name="password2" type="password" placeholder="Enter password again" required />
+          </div>
+        </div>
+        <div class="input-box">
+          <label>Email Address</label>
+          <input class="email_input" name="email" type="text" placeholder="Enter email address" required />
+        </div>
+
+        <div class="column">
+          <div class="input-box">
+            <label>Birth Date</label>
+            <input class="birth_date_input" name="birth_date" type="date" placeholder="Enter birth date" required />
+          </div>
+        </div>
+        <div class="gender-box">
+          <h3>Gender</h3>
+          <div class="gender-option">
+            <div class="gender">
+              <input class="gender_input" value="male" type="radio" id="check-male" name="gender" checked />
+              <label for="check-male">male</label>
+            </div>
+            <div class="gender">
+              <input class="gender_input" value="female" type="radio" id="check-female" name="gender" />
+              <label for="check-female">Female</label>
+            </div>
+            <div class="gender">
+              <input class="gender_input" value="null" type="radio" id="check-other" name="gender" />
+              <label for="check-other">prefer not to say</label>
+            </div>
+          </div>
+        </div>
+        <div class="input-box address">
+          <label>Address</label>
+          <input class="street_input" name="street" type="text" placeholder="Enter street address" required />
+          <div class="column">
+            <div class="select-box">
+              <select class="country_input" name="country">
+                <option hidden>Country</option>
+                <option>Germany</option>
+                <option>Italy</option>
+                <option>Turkey</option>
+              </select>
+            </div>
+            <input class="city_input" name="city" type="text" placeholder="Enter your city" required />
+          </div>
+          <div class="column">
+            <input class="street_no_input" name="region" type="text" placeholder="Enter your region" required />
+            <input class="zip_code_input" name="zip_code" type="number" placeholder="Enter postal code" required />
+          </div>
+        </div>
+        <div class="vaccine-box">
+            <h3>Choose the vaccinations you received:</h3>
+            <div class="vaccine-option">
+                {% for vaccine in vaccinations %}
+                  <div class="vaccine">
+                    <input class="vaccine_input" value={{ vaccine.id }} type="checkbox" id={{ vaccine.id }} name="vaccine" />
+                    <label for={{ vaccine.id }}>{{ vaccine.name }} - Dose: {{ vaccine.dose }}/{{ vaccine.total_doses }}</label>
+                  </div>
+                {% endfor %}
+            </div>
+          </div>
+        <button id="submitButton">Submit</button>
+      </form>
+    </section>
+
+    <script>
+        document.querySelector("#submitButton").addEventListener("click", async (e) => {
+            e.preventDefault();
+            const registerURL = "http://127.0.0.1:8000/api/register";
+
+            const inputs = {
+                first_name : document.querySelector(".first_name_input"),
+                last_name : document.querySelector(".last_name_input"),
+                password1 : document.querySelector(".password1_input"),
+                password2 : document.querySelector(".password2_input"),
+                email : document.querySelector(".email_input"),
+                birth_date : document.querySelector(".birth_date_input"),
+                gender : document.querySelector(".gender_input:checked"),
+                street : document.querySelector(".street_input"),
+                street_no : document.querySelector(".street_no_input"),
+                country : document.querySelector(".country_input"),
+                city : document.querySelector(".city_input"),
+                zip_code : document.querySelector(".zip_code_input"),
+                vaccinations : document.querySelectorAll(".vaccine_input:checked"),
+            }
+
+            const first_name = inputs.first_name.value;
+            const last_name = inputs.last_name.value;
+            const password1 = inputs.password1.value;
+            const password2 = inputs.password2.value;
+            const email = inputs.email.value;
+            const birth_date = inputs.birth_date.value;
+            const gender = inputs.gender.value;
+            const street = inputs.street.value;
+            const street_no = inputs.street_no.value;
+            const country = inputs.country.value;
+            const city = inputs.city.value;
+            const zip_code = inputs.zip_code.value;
+            let vaccinations = [];
+
+            if (password1 !== password2){
+                alert("Passwords don't match")
+                return
+            }
+
+
+            inputs.vaccinations.forEach((vaccine) => {
+                vaccinations.push(vaccine.value)
+            })
+
+            const data = {
+                first_name : first_name,
+                last_name : last_name,
+                password: password1,
+                email : email,
+                birth_date : birth_date,
+                sex : gender,
+                address_data: {
+                    street : street,
+                    no : street_no,
+                    country : country,
+                    city : city,
+                    zip_code : zip_code,
+                },
+                vaccinations : vaccinations,
+            }
+            
+            try{
+                const response = await fetch(registerURL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.status === 201) {
+                    // Successful login, redirect to google.com
+                    window.location.href = "http://127.0.0.1:8000/pages/home";
+                } else {
+                    // Display error message
+                    alert("User creation failed, try again")
+                }
+                
+            } catch (error) {
+                alert("Invalid input provided, try again")
+            }
+            
+
+            console.log(data);
+        })
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
