@@ -50,12 +50,12 @@ class RegisterUser(APIView):
                 user = User.objects.create_user(username=username, password=data['password'], email=data['email'])
 
                 # Create the extended AppUser object
-                app_user = AppUser.objects.create(user=user, email=data['email'], age=data['age'], sex=data['sex'],
-                                                  first_name=data['first_name'], last_name=data['last_name'],
-                                                  address=address)
+                app_user = AppUser.objects.create(user=user, email=data['email'], birth_date=data['birth_date'],
+                                                  sex=data['sex'], first_name=data['first_name'],
+                                                  last_name=data['last_name'], address=address)
 
-                for vaccine in data['vaccinations']:
-                    vaccine = Vaccination.objects.get(id=vaccine['id'])
+                for vaccine_id in data['vaccinations']:
+                    vaccine = Vaccination.objects.get(id=vaccine_id)
                     user_vaccination = UserVaccination.objects.create(
                         user=app_user,
                         vaccination=vaccine
@@ -70,8 +70,11 @@ class RegisterUser(APIView):
                 error_message = f"User creation failed"
                 return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)
 
+            auth.login(request, user)
             return Response(status=status.HTTP_201_CREATED)
 
+        else:
+            return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginUser(APIView):
     serializer_class = LoginUserSerializer

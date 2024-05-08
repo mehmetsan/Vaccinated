@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 
 from api.models import AppUser
+from api.utils import get_all_vaccinations
 
 
 # Create your views here.
@@ -21,3 +22,8 @@ def sign_in_page(request):
 def sign_out(request):
     logout(request)
     return redirect("sign_in")
+
+
+def sign_up_page(request):
+    vaccinations = get_all_vaccinations()
+    return render(request, "sign_up.html", context={"vaccinations": vaccinations})

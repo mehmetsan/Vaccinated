@@ -13,10 +13,10 @@ class RegisterUserSerializer(serializers.Serializer):
     first_name = serializers.CharField(required=True, allow_blank=False, allow_null=False)
     last_name = serializers.CharField(required=True, allow_blank=False, allow_null=False)
     password = serializers.CharField(required=True, allow_blank=False, allow_null=False)
-    confirm_password = serializers.CharField(required=True, allow_blank=False, allow_null=False)
-    age = serializers.IntegerField(required=True)
+    birth_date = serializers.DateField(required=True,  allow_null=False, format='%Y-%m-%d')
     sex = serializers.CharField(required=True, allow_blank=False, allow_null=False)
     vaccinations = serializers.JSONField(required=True, allow_null=False)
+
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
