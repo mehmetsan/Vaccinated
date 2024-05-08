@@ -8,6 +8,20 @@ from api.models import AppUser, Vaccination, UserVaccination
 from api.serializers import AddressSerializer, RegisterUserSerializer, LoginUserSerializer
 
 
+class UserAPIView(APIView):
+    def get(self, request):
+        if self.request.user.is_authenticated:
+            user = AppUser.objects.get(email=self.request.user.email)
+            response = {
+                'id': user.id,
+                'email': user.email,
+                'username': user.username,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+            }
+            return Response(data=response)
+
+
 class RegisterUser(APIView):
     serializer_class = RegisterUserSerializer
 
@@ -91,3 +105,11 @@ class VaccinationAPIView(APIView):
                 "optional": vaccine.optional
             })
         return Response(data=response, status=status.HTTP_200_OK)
+
+
+class UserMissingVaccinationsAPIView(APIView):
+    def get(self, request):
+        user_id = self.request.query_params.get('user_id')
+        user = AppUser.objects.get(id=user_id)
+        missing_vaccinations = user.get_missing_vaccinations()
+        return Response(data={'missing_vaccinations': missing_vaccinations})
