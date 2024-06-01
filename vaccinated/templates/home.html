@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,4 +11,295 @@
         console.log(dat)
     </script>
 </body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+	<style>
+        
+		/* Styling the body */
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		/* Styling section, giving background
+			image and dimensions */
+		section {
+			width: 100%;
+			height: 100vh;
+			background:
+				url(
+'https://d2jx2rerrg6sh3.cloudfront.net/images/news/ImageForNews_769409_1705544800952821.jpg'
+				);
+			background-size: cover;
+		}
+
+		/* Styling the left floating section */
+		section .leftBox {
+			width: 50%;
+			height: 100%;
+			float: left;
+			padding: 50px;
+			box-sizing: border-box;
+            
+		}
+
+		/* Styling the background of 
+			left floating section */
+		section .leftBox .content {
+			color: #fff;
+			background: rgba(0, 0, 0, 0.5);
+			padding: 40px;
+			transition: .5s;
+            font-family: 'Montserrat', sans-serif;
+		}
+
+		/* Styling the hover effect 
+			of left floating section */
+		section .leftBox .content:hover {
+			background: #e91e63;
+            font-family: 'Montserrat', sans-serif;
+		}
+
+		/* Styling the header of left 
+			floating section */
+		section .leftBox .content h1 {
+			margin: 0;
+			padding: 0;
+			font-size: 50px;
+			text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+		}
+
+		/* Styling the paragraph of 
+			left floating section */
+		section .leftBox .content p {
+			margin: 10px 0 0;
+			padding: 0;
+            font-family: 'Montserrat', sans-serif;
+		}
+
+        section .leftBottomBox{
+
+        }
+
+		/* Styling the three events section */
+		section .events {
+			position: relative;
+			width: 50%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			float: right;
+			box-sizing: border-box;
+		}
+
+		/* Styling the links of 
+		the events section */
+		section .events ul {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			margin: 0;
+			padding: 40px;
+			box-sizing: border-box;
+		}
+
+		/* Styling the lists of the event section */
+		section .events ul li {
+			list-style: none;
+			background: #fff;
+			box-sizing: border-box;
+			height: 200px;
+			margin: 15px 0;
+		}
+
+		/* Styling the time class of events section */
+		section .events ul li .time {
+			position: relative;
+			padding: 20px;
+			background: #262626;
+			box-sizing: border-box;
+			width: 30%;
+			height: 100%;
+			float: left;
+			text-align: center;
+			transition: .5s;
+		}
+
+		/* Styling the hover effect
+			of events section */
+		section .events ul li:hover .time {
+			background: #e91e63;
+		}
+
+		/* Styling the header of time 
+			class of events section */
+		section .events ul li .time h2 {
+			position: absolute;
+			margin: 0;
+			padding: 0;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: #fff;
+			font-size: 60px;
+			line-height: 30px;
+            font-family: 'Montserrat', sans-serif;
+		}
+
+		/* Styling the texts of time 
+		class of events section */
+		section .events ul li .time h2 span {
+			font-size: 30px;
+            font-family: 'Montserrat', sans-serif;
+		}
+
+		/* Styling the details 
+		class of events section */
+		section .events ul li .vaccination {
+			padding: 20px;
+			background: #fff;
+			box-sizing: border-box;
+			width: 70%;
+			height: 100%;
+			float: left;
+		}
+
+		/* Styling the header of the 
+		details class of events section */
+		section .events ul li .vaccination h3 {
+			position: relative;
+			margin: 0;
+			padding: 0;
+			font-size: 22px;
+            font-family: 'Montserrat', sans-serif;
+		}
+
+		/* Styling the lists of details 
+		class of events section */
+		section .events ul li .vaccination p {
+			position: relative;
+			margin: 10px 0 0;
+			padding: 0;
+			font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+		}
+
+		/* Styling the links of details
+		class of events section */
+		section .events ul li .vaccination a {
+			display: inline-block;
+			text-decoration: none;
+			padding: 10px 15px;
+			border: 1.5px solid #262626;
+			margin-top: 8px;
+			font-size: 18px;
+			transition: .5s;
+            font-family: 'Montserrat', sans-serif;
+		}
+
+		/* Styling the details class's hover effect */
+		section .events ul li .vaccination a:hover {
+			background: #e91e63;
+			color: #fff;
+			border-color: #e91e63;
+		}
+	</style>
+</head>
+
+<body>
+	<section>
+		<div class="leftBox">
+			<div class="content">
+				<h1>
+					Your Vaccinations
+				</h1>
+				<p>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Aperiam non beatae in ad magni sint consectetur minima rem 
+                    sunt iure. Autem eligendi ea vitae incidunt ipsam cumque 
+                    exercitationem sunt dolorem!
+				</p>
+			</div>
+		</div>
+        <!--
+        <div class="leftBottomBox">
+            <div class="calendar">
+                <h1>Calendar Here</h1>
+            </div>
+        </div>
+		-->
+        
+        <div class="events">
+			<ul>
+				<li>
+					<div class="time">
+						<h2>
+							15 <br><span>March</span>
+						</h2>
+					</div>
+					<div class="vaccination">
+						<h3>
+							Vaccination1
+						</h3>
+						<p>
+							Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                            Ea inventore asperiores deleniti enim ipsa vero dignissimos 
+                            impedit saepe sint labore optio exercitationem, tenetur explicabo 
+                            nulla autem harum consectetur aut! Quia!
+						</p>
+						<a href="#">View Details</a>
+					</div>
+					<div style="clear: both;"></div>
+				</li>
+				<li>
+					<div class="time">
+						<h2>
+							27 <br><span>May</span>
+						</h2>
+					</div>
+					<div class="vaccination">
+						<h3>
+							Vaccination2
+						</h3>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Iure mollitia quisquam obcaecati rem aspernatur exercitationem 
+                            provident quod reprehenderit est similique repellat aliquam sapiente, 
+                            ullam inventore nisi sequi ad, esse sint.
+						</p>
+						<a href="#">View Details</a>
+					</div>
+					<div style="clear:both;"></div>
+				</li>
+				<li>
+					<div class="time">
+						<h2>
+							12 <br><span>August</span>
+						</h2>
+					</div>
+					<div class="vaccination">
+						<h3>
+							Vaccination3
+						</h3>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Tenetur suscipit nemo aperiam ea quod voluptate enim iusto 
+                            qui non quae porro, dolorum numquam cupiditate quia exercitationem 
+                            consectetur quibusdam sunt perspiciatis!
+						</p>
+						<a href="#">View Details</a>
+					</div>
+					<div style="clear:both;"></div>
+				</li>
+			</ul>
+		</div>
+	</section>
+</body>
+
 </html>
