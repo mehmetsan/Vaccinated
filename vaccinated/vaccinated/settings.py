@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+from environment_vars import from_email, email_password
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "api",
-    "pages"
+    "pages",
+    "corsheaders"
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,26 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = from_email
+EMAIL_HOST_PASSWORD = email_password
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = from_email
+
+
+CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3030',
+] # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    'http://localhost:3030',
 ]
 
 ROOT_URLCONF = "Vaccinated.urls"
@@ -102,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#AUTHENTICATION_BACKENDS = ['api.backends.UserBackend']
+AUTHENTICATION_BACKENDS = ['api.backends.UserBackend']
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

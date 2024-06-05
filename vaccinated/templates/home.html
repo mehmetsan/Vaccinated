@@ -1,18 +1,3 @@
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-    <script type='text/javascript'>
-        var dat = {{ missing_vaccinations|safe }};
-        console.log(dat)
-    </script>
-</body>
-</html>
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,10 +69,6 @@
             font-family: 'Montserrat', sans-serif;
 		}
 
-        section .leftBottomBox{
-
-        }
-
 		/* Styling the three events section */
 		section .events {
 			position: relative;
@@ -98,30 +79,23 @@
 			box-sizing: border-box;
 		}
 
-		/* Styling the links of 
+		/* Styling the links of
 		the events section */
-		section .events ul {
-			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-			margin: 0;
-			padding: 40px;
-			box-sizing: border-box;
-		}
 
 		/* Styling the lists of the event section */
 		section .events ul li {
 			list-style: none;
 			background: #fff;
 			box-sizing: border-box;
-			height: 200px;
+			height: 40px;
+			width: 300px;
 			margin: 15px 0;
 		}
 
 		/* Styling the time class of events section */
 		section .events ul li .time {
 			position: relative;
-			padding: 20px;
+			padding: 10px;
 			background: #262626;
 			box-sizing: border-box;
 			width: 30%;
@@ -139,42 +113,27 @@
 
 		/* Styling the header of time 
 			class of events section */
-		section .events ul li .time h2 {
-			position: absolute;
-			margin: 0;
-			padding: 0;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			color: #fff;
-			font-size: 60px;
-			line-height: 30px;
-            font-family: 'Montserrat', sans-serif;
+		section .events ul li .time span {
+			color: white;
 		}
 
-		/* Styling the texts of time 
-		class of events section */
-		section .events ul li .time h2 span {
-			font-size: 30px;
-            font-family: 'Montserrat', sans-serif;
-		}
 
 		/* Styling the details 
 		class of events section */
 		section .events ul li .vaccination {
-			padding: 20px;
 			background: #fff;
 			box-sizing: border-box;
 			width: 70%;
 			height: 100%;
 			float: left;
+			padding: 5px;
 		}
 
 		/* Styling the header of the 
 		details class of events section */
 		section .events ul li .vaccination h3 {
 			position: relative;
-			margin: 0;
+			margin: auto;
 			padding: 0;
 			font-size: 22px;
             font-family: 'Montserrat', sans-serif;
@@ -209,97 +168,203 @@
 			color: #fff;
 			border-color: #e91e63;
 		}
+
+		.left {
+			width: 50%;
+		}
+
+		.right {
+			width: 50%;
+		}
 	</style>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeZ2Q4BwACTPnAbJ7GHPMMp_VBF2lT6WQ&callback=myMap"></script>
 </head>
 
 <body>
 	<section>
-		<div class="leftBox">
-			<div class="content">
-				<h1>
-					Your Vaccinations
+		<div class="leftBox" style="display:flex; flex-direction: column ">
+			<div style="display:flex;">
+				<h1 style="color: white">
+					Nearest Vaccination Centers
 				</h1>
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    Aperiam non beatae in ad magni sint consectetur minima rem 
-                    sunt iure. Autem eligendi ea vitae incidunt ipsam cumque 
-                    exercitationem sunt dolorem!
-				</p>
 			</div>
+			<div id="map" style="width:100%;height:400px; margin-top:100px; display: flex"></div>
 		</div>
-        <!--
-        <div class="leftBottomBox">
-            <div class="calendar">
-                <h1>Calendar Here</h1>
-            </div>
-        </div>
-		-->
         
         <div class="events">
-			<ul>
-				<li>
-					<div class="time">
-						<h2>
-							15 <br><span>March</span>
-						</h2>
-					</div>
-					<div class="vaccination">
-						<h3>
-							Vaccination1
-						</h3>
-						<p>
-							Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                            Ea inventore asperiores deleniti enim ipsa vero dignissimos 
-                            impedit saepe sint labore optio exercitationem, tenetur explicabo 
-                            nulla autem harum consectetur aut! Quia!
-						</p>
-						<a href="#">View Details</a>
-					</div>
-					<div style="clear: both;"></div>
-				</li>
-				<li>
-					<div class="time">
-						<h2>
-							27 <br><span>May</span>
-						</h2>
-					</div>
-					<div class="vaccination">
-						<h3>
-							Vaccination2
-						</h3>
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Iure mollitia quisquam obcaecati rem aspernatur exercitationem 
-                            provident quod reprehenderit est similique repellat aliquam sapiente, 
-                            ullam inventore nisi sequi ad, esse sint.
-						</p>
-						<a href="#">View Details</a>
-					</div>
-					<div style="clear:both;"></div>
-				</li>
-				<li>
-					<div class="time">
-						<h2>
-							12 <br><span>August</span>
-						</h2>
-					</div>
-					<div class="vaccination">
-						<h3>
-							Vaccination3
-						</h3>
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Tenetur suscipit nemo aperiam ea quod voluptate enim iusto 
-                            qui non quae porro, dolorum numquam cupiditate quia exercitationem 
-                            consectetur quibusdam sunt perspiciatis!
-						</p>
-						<a href="#">View Details</a>
-					</div>
-					<div style="clear:both;"></div>
-				</li>
-			</ul>
+			<div class="old" style="height: 33%; display: flex; flex-direction: row">
+				<div class="left">
+					<h2 style="color: white; margin-left: 40px">Completed Vaccines</h2>
+					<ul style="overflow-y: scroll; height: 100px; overflow-x: hidden;">
+						{% for vaccine in Completed %}
+							<li>
+								<div class="time">
+									<span>{{ vaccine.date }}</span>
+								</div>
+								<div class="vaccination">
+									<h3>
+										{{ vaccine.name }}
+									</h3>
+								</div>
+								<div style="clear: both;"></div>
+							</li>
+						{% endfor %}
+
+					</ul>
+				</div>
+				<div class="right">
+					<h2 style="color: white; margin-left: 40px">Missed Vaccines</h2>
+					<ul style="overflow-y: scroll; height: 100px; overflow-x: hidden;">
+						{% for vaccine in Missed %}
+							<li>
+								<div class="time">
+									<span>{{ vaccine.date }}</span>
+								</div>
+								<div class="vaccination">
+									<h3>
+										{{ vaccine.name }}
+									</h3>
+								</div>
+								<div style="clear: both;"></div>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="current" style="height: 33%; margin-left: 20%; width: 400px ">
+				<h2 style="color: white; margin-left: 40px">Active Vaccines</h2>
+				<ul style="overflow-y: scroll; height: 100px; overflow-x: hidden;">
+					{% for vaccine in Needed %}
+						<li>
+							<div class="time">
+								<span>{{ vaccine.date }}</span>
+							</div>
+							<div class="vaccination">
+								<h3>
+									{{ vaccine.name }}
+								</h3>
+							</div>
+							<div style="clear: both;"></div>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+
+			<div class="new" style="height: 33%;  display: flex; flex-direction: row">
+				<div class="left">
+					<h2 style="color: white; margin-left: 40px">Upcoming Vaccines</h2>
+					<ul style="overflow-y: scroll; height: 100px; overflow-x: hidden;">
+						{% for vaccine in Upcoming %}
+							<li>
+								<div class="time">
+									<span>{{ vaccine.date }}</span>
+								</div>
+								<div class="vaccination">
+									<h3>
+										{{ vaccine.name }}
+									</h3>
+								</div>
+								<div style="clear: both;"></div>
+							</li>
+						{% endfor %}
+				</ul>
+				</div>
+				<div class="right">
+					<h2 style="color: white; margin-left: 40px">Yearly Vaccines</h2>
+					<ul style="overflow-y: scroll; height: 100px; overflow-x: hidden;">
+						{% for vaccine in Yearly %}
+							<li>
+								<div class="time">
+									<span>{{ vaccine.status }}</span>
+								</div>
+								<div class="vaccination">
+									<h3>
+										{{ vaccine.name }}
+									</h3>
+								</div>
+								<div style="clear: both;"></div>
+							</li>
+						{% endfor %}
+				</ul>
+				</div>
+			</div>
+
 		</div>
 	</section>
+
+	<script>
+
+		function getQueryVariable(variable) {
+	  		var query = window.location.search.substring(1);
+	  		var vars = query.split("&");
+	  		for (var i=0;i<vars.length;i++) {
+				var pair = vars[i].split("=");
+				if (pair[0] == variable) {
+		  			return pair[1];
+				}
+	  		}
+		}
+
+		var latVar = getQueryVariable("lat");
+		var lngVar = getQueryVariable("lng");
+
+        if (!latVar || !lngVar){
+
+			const getUserLocation = () => {
+				const successCallback = (position) => {
+                    let lat = position.coords.latitude;
+                    let lng = position.coords.longitude;
+					let newURL = window.location.href+"?lat="+lat+"&lng="+lng;
+            		window.location.href = newURL;
+        		}
+
+				const errorCallback = (error) => {
+		  			console.log(error); // Error details if location retrieval fails
+				};
+
+				navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+			}
+            getUserLocation();
+
+
+
+
+		}
+
+ 		else {
+		 	let position;
+			let marker;
+			let map;
+
+			async function initMap() {
+			  const { Map } = await google.maps.importLibrary("maps");
+
+			  map = new Map(document.getElementById("map"), {
+				center: { lat: parseFloat(latVar), lng: parseFloat(lngVar) },
+				zoom: 15,
+			  });
+
+			  {% for element in hospitals %}
+				position = {
+					lat: {{element.lat}},
+					lng: {{element.lng}},
+				}
+
+                marker = new google.maps.Marker({
+					map: map,
+                    position: position,
+                });
+            {% endfor %}
+			}
+
+			initMap();
+		}
+
+
+	</script>
+
+
 </body>
 
 </html>

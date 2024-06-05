@@ -1,5 +1,8 @@
+from datetime import timedelta
+
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User, auth
+from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -56,9 +59,12 @@ class RegisterUser(APIView):
 
                 for vaccine_id in data['vaccinations']:
                     vaccine = Vaccination.objects.get(id=vaccine_id)
+                    vaccine_date = app_user.birth_date + timedelta(days=30*vaccine.start)
+
                     user_vaccination = UserVaccination.objects.create(
                         user=app_user,
-                        vaccination=vaccine
+                        vaccination=vaccine,
+                        date=vaccine_date
                     )
             except Exception as e:
                 print(e)
@@ -116,3 +122,8 @@ class UserMissingVaccinationsAPIView(APIView):
         user = AppUser.objects.get(id=user_id)
         missing_vaccinations = user.get_missing_vaccinations()
         return Response(data={'missing_vaccinations': missing_vaccinations})
+
+
+class SendVaccinationEmails(APIView):
+    def get(self, request):
+        
