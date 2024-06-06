@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
+from django.core.mail import send_mail
+from environment_vars import from_email
 
 class Address(models.Model):
     country = models.CharField(max_length=50)
@@ -107,6 +109,46 @@ class AppUser(models.Model):
                 })
 
         return summary, yearly_summary
+
+    def notify_user_with_email(self):
+        today = datetime.today().date()
+        user_age_delta = today - self.birth_date
+
+        completed_vaccinations = UserVaccination.objects.filter(user=self, vaccination__isnull=False)
+        completed_vaccinations = Vaccination.objects.filter(id__in=completed_vaccinations.values_list('vaccination', flat=True))
+        completed_yearly = UserVaccination.objects.filter(user=self, yearly_vaccination__isnull=False)
+        completed_yearly = YearlyVaccination.objects.filter(id__in=completed_yearly.values_list('yearly_vaccination', flat=True))
+
+        future_vaccinations = Vaccination.objects.all().exclude(id__in=completed_vaccinations)
+        yearly_vaccinations = YearlyVaccination.objects.all()
+        incomplete_yearlies = yearly_vaccinations.exclude(id__in=completed_yearly)
+
+        needed_vaccinations = []
+
+        for vaccine in future_vaccinations:
+            start_threshold = timedelta(days=30*(vaccine.start-1))
+            end_threshold = timedelta(days=30*vaccine.end)
+            if end_threshold >= user_age_delta >= start_threshold:
+                vaccine_start_date = vaccine.get_user_vacc_date(user=self)
+                if vaccine_start_date > datetime.now().date():
+                    needed_vaccinations.append(vaccine)
+
+        message = "This is a reminder that you have the following vaccinations coming up:\n\n"
+
+        if needed_vaccinations:
+            message += "Vaccinations:\n"
+            for vaccine in needed_vaccinations:
+                message += f"Vaccination: {str(vaccine)} , Suggested Date: {vaccine.get_user_vacc_date(user=self).strftime("%d/%m/%Y")}\n"
+
+        if incomplete_yearlies:
+            message += "\nYearly Vaccinations\n"
+            for vaccine in incomplete_yearlies:
+                message += f"Vaccination: {str(vaccine)}"
+
+        send_mail(subject="Your Vaccination Reminder",
+                  message=message,
+                  from_email=from_email,
+                  recipient_list=[self.email])
 
 
 class Vaccination(models.Model):

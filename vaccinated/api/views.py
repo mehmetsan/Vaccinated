@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from django.core.mail import send_mail
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User, auth
 from django.shortcuts import render
@@ -9,6 +10,7 @@ from rest_framework.views import APIView
 
 from api.models import AppUser, Vaccination, UserVaccination
 from api.serializers import AddressSerializer, RegisterUserSerializer, LoginUserSerializer
+from environment_vars import from_email
 
 
 class UserAPIView(APIView):
@@ -82,6 +84,7 @@ class RegisterUser(APIView):
         else:
             return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class LoginUser(APIView):
     serializer_class = LoginUserSerializer
 
@@ -122,8 +125,3 @@ class UserMissingVaccinationsAPIView(APIView):
         user = AppUser.objects.get(id=user_id)
         missing_vaccinations = user.get_missing_vaccinations()
         return Response(data={'missing_vaccinations': missing_vaccinations})
-
-
-class SendVaccinationEmails(APIView):
-    def get(self, request):
-        
