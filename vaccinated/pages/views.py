@@ -1,19 +1,19 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-from datetime import datetime, timedelta
+from environment_vars import google_key
 
-from api.models import AppUser, UserVaccination
+from api.models import AppUser
 from api.utils import get_all_vaccinations
 import requests
 
-# Create your views here.
+
 def home(request):
     if request.user.is_authenticated:
 
         params = request.GET
         hospital_coords = []
         if params:
-            key = "AIzaSyBeZ2Q4BwACTPnAbJ7GHPMMp_VBF2lT6WQ"
+            key = google_key
             url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={params['lat']},{params['lng']}&radius=1000&type=hospital&key={key}"
 
             response = requests.get(url)
@@ -28,7 +28,6 @@ def home(request):
                     'lat': lat,
                     'lng': lng,
                 })
-
 
         user = AppUser.objects.get(email=request.user.email)
 
