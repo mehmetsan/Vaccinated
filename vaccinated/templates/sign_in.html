@@ -200,7 +200,7 @@ form .button {
 <body>
 <div class="container">
     <header>Login</header>
-    <form>
+    <form method="POST" action="http://127.0.0.1:8000/pages/sign_in">
         <div class="input-field">
             <input value="trabzonpower@gmail.com" name="email" type="email" id="email" required>
             <label>Email</label>
@@ -216,51 +216,10 @@ form .button {
         </div>
     </form>
     <div class="signup" >
-        Not a member? <a id="signup" href="#">Sign Up</a>
+        Not a member? <a id="signup" href="http://127.0.0.1:8000/pages/sign_up">Sign Up</a>
     </div>
 </div>
-<script>
-    const form = {
-        email: document.querySelector("#email"),
-        password: document.querySelector("#password"),
-        submit: document.querySelector(".button"),
-        messages: document.getElementById("form-messages")
-    };
 
-    document.querySelector("#signup").addEventListener("click", () => {
-        window.location.href = "http://127.0.0.1:8000/pages/sign_up";
-    })
-
-    form.submit.addEventListener("click", async (e) => {
-        e.preventDefault();
-        const loginUrl = "http://127.0.0.1:8000/api/login"; // Replace with your actual API URL
-
-        try {
-            const response = await fetch(loginUrl, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: form.email.value,
-                    password: form.password.value
-                })
-            });
-
-
-            if (response.status === 200) {
-                // Successful login, redirect to google.com
-                window.location.href = "http://127.0.0.1:8000/pages/home";
-            } else {
-                // Display error message
-                form.messages.innerHTML = "Invalid credentials. Please try again.";
-            }
-        } catch (error) {
-            console.error("Error during login:", error);
-            form.messages.innerHTML = "An error occurred. Please try again later.";
-        }
-    });
-</script>
 
 
 <script>

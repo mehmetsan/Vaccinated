@@ -1,8 +1,31 @@
-from django.db import models
-from django.contrib.auth.models import User
 from datetime import datetime, timedelta
+from django.utils import timezone
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from django.db import models
+
+from api.utils import randomword
 from environment_vars import from_email
+import typing as tp
+
+
+def get_all_vaccinations() -> tp.List:
+    vaccinations = Vaccination.objects.all()
+    results = []
+
+    for vaccination in vaccinations:
+        results.append({
+            'id': vaccination.id,
+            'name': vaccination.name,
+            "dose": vaccination.dose,
+            "start": vaccination.start,
+            "end": vaccination.end,
+            "optional": "true" if vaccination.optional else "false",
+            "total_doses": vaccination.total_doses,
+            "display_name": str(vaccination)
+        })
+    return results
+
 
 class Address(models.Model):
     country = models.CharField(max_length=50)
@@ -23,6 +46,7 @@ class AppUser(models.Model):
     sex = models.CharField(null=False, max_length=50, choices=[('male', 'Male'), ('female', 'Female')])
     address = models.ForeignKey(Address, null=True, on_delete=models.SET_NULL)
     birth_date = models.DateField(null=True)
+    role = models.CharField(max_length=50, choices=[('admin', 'Admin'), ('normal', 'Normal')], default='normal')
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -174,7 +198,6 @@ class YearlyVaccination(models.Model):
         return self.name
 
 
-
 class UserVaccination(models.Model):
     user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     vaccination = models.ForeignKey(Vaccination, on_delete=models.CASCADE, null=True, blank=True)
@@ -183,3 +206,40 @@ class UserVaccination(models.Model):
 
     def __str__(self):
         return f"{self.user} / {self.vaccination}"
+
+
+class TwoFactorEmailModel(models.Model):
+    code = models.CharField(max_length=32)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expiration = models.DateTimeField(default=None, null=True)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+
+    def save(self, **kwargs):
+        self.code = self.generate_code()
+        self.expiration = datetime.now() + timedelta(hours=1)
+        super().save()
+
+        try:
+            body = f"You can use the following code to login: {self.code}"
+
+            response = self.send_two_factor_email(
+                subject='Login Two Factor Email',
+                body=body,
+            )
+        except Exception as e:
+            print(e)
+
+    def generate_code(self):
+        return randomword(5)
+
+    def send_two_factor_email(self, subject, body):
+        response = send_mail(subject, body,
+                             from_email=from_email,
+                             recipient_list=[self.user.user.email])
+        return response
+
+    def can_be_sent(self, code):
+        return self.expiration > datetime.now() and self.code == code
+
+    def is_expired(self):
+        return self.expiration < timezone.now()
