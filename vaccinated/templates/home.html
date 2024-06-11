@@ -177,7 +177,7 @@
 			width: 50%;
 		}
 	</style>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeZ2Q4BwACTPnAbJ7GHPMMp_VBF2lT6WQ&callback=myMap"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtQf9Pe8IRzaHbOSEn6D0No41g2oB5EKs&callback=myMap"></script>
 </head>
 
 <body>
@@ -313,22 +313,23 @@
 
 			const getUserLocation = () => {
 				const successCallback = (position) => {
-                    let lat = position.coords.latitude;
-                    let lng = position.coords.longitude;
+					let lat = 45.41029851592819;
+                    let lng = 11.90292062088778;
 					let newURL = window.location.href+"?lat="+lat+"&lng="+lng;
             		window.location.href = newURL;
         		}
 
 				const errorCallback = (error) => {
+                    let lat = 45.41029851592819;
+                    let lng = 11.90292062088778;
+                    let newURL = window.location.href+"?lat="+lat+"&lng="+lng;
+            		window.location.href = newURL;
+
 		  			console.log(error); // Error details if location retrieval fails
 				};
-
 				navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 			}
             getUserLocation();
-
-
-
 
 		}
 
